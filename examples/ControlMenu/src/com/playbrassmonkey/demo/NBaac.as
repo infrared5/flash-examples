@@ -8,7 +8,7 @@ package com.playbrassmonkey.demo
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
-	import flash.external.ExternalInterface;
+	//import flash.external.ExternalInterface;
 	import flash.media.SoundTransform;
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
@@ -59,11 +59,11 @@ package com.playbrassmonkey.demo
 		public function boot():void
 		{
 	
-			ExternalInterface.addCallback('nbaac.setVolume', onVolume);
-			ExternalInterface.addCallback('nbaac.togglePause', onTogglePause);
-			ExternalInterface.addCallback('nbaac.setBuffer', setBufferLength);
-			ExternalInterface.addCallback('nbaac.getBuffer', getBufferLength);
-			ExternalInterface.addCallback('nbaac.getTime', getTime);
+			//ExternalInterface.addCallback('nbaac.setVolume', onVolume);
+			//ExternalInterface.addCallback('nbaac.togglePause', onTogglePause);
+			//ExternalInterface.addCallback('nbaac.setBuffer', setBufferLength);
+			//ExternalInterface.addCallback('nbaac.getBuffer', getBufferLength);
+			//ExternalInterface.addCallback('nbaac.getTime', getTime);
 			var meta:Object={};
 			meta.uri="";
 			meta.StreamTitle=""; 
@@ -122,7 +122,7 @@ package com.playbrassmonkey.demo
 		
 		private function onIo(pe:IOErrorEvent):void
 		{
-			ExternalInterface.call('logit','IOErrorEvent')
+			//ExternalInterface.call('logit','IOErrorEvent')
 		}       
 		private function onTag(sde:StreamDataEvent):void
 		{
@@ -137,11 +137,11 @@ package com.playbrassmonkey.demo
 		}
 		private function onClose(e:Event):void
 		{
-			ExternalInterface.call('logit','onClose')
+			//ExternalInterface.call('logit','onClose')
 		}
 		public function onMetaData(e:Object):void
 		{
-			ExternalInterface.call('logit','onMetaData')
+			//ExternalInterface.call('logit','onMetaData')
 			
 		}
 		
@@ -163,7 +163,7 @@ package com.playbrassmonkey.demo
 		
 		private function onNoPolicy(se:SecurityErrorEvent):void
 		{
-			ExternalInterface.call('logit','SecurityErrorEvent'+host+resource+'<br />'+se.text);
+			//ExternalInterface.call('logit','SecurityErrorEvent'+host+resource+'<br />'+se.text);
 		}
 		
 	}
