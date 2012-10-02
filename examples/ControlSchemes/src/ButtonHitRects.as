@@ -2,6 +2,7 @@ package
 {
 	import com.brassmonkey.BMApplication;
 	import com.brassmonkey.controls.BMControls;
+	import com.brassmonkey.controls.writer.AppDisplayObject;
 	import com.brassmonkey.controls.writer.AppScheme;
 	import com.brassmonkey.controls.writer.BMButton;
 	import com.brassmonkey.controls.writer.BMDynamicText;
@@ -17,7 +18,7 @@ package
 	import flash.utils.setInterval;
 	import flash.utils.setTimeout;
 	
-	[SWF(width="768", height="768")]
+	[SWF(width="480", height="320")]
 	public class ButtonHitRects extends Sprite
 	{
 
@@ -28,7 +29,10 @@ package
 		public function ButtonHitRects()
 		{
 
-			addChild(new SquareScheme());
+			
+			
+			
+			addChild(new HitRectDemoScheme());
 			addChild(cursor);
 			stage.frameRate=60;
 			
@@ -36,29 +40,28 @@ package
 			bm= new BMApplication(loaderInfo.parameters);
 			bm.initiate("Hit rects", 1);
 			bm.addEventListener(DeviceEvent.DEVICE_LOADED, onLoaded);
-			bm.addEventListener(DeviceEvent.DEVICE_DISCONNECTED, onUnLoaded);
+		
 			
 			// A square scheme to be held in landscape mode.
-			var sq:SquareScheme=new SquareScheme();
-			//set the scaler to the screen size the controls were created for.
-			StageScaler.LONG=768;			
-			StageScaler.SHORT=768;
-			//parse the scheme, and add the actual design orientation, width and height.
-			appScheme = BMControls.parseDynamicMovieClip(sq,false,true,'landscape',768,768 );
+			var sq:HitRectDemoScheme=new HitRectDemoScheme();
 
-			var button:BMButton= appScheme.getChildByName("select") as BMButton;
+			//parse the scheme, and add the actual design orientation, width and height.
+			appScheme = BMControls.parseDynamicMovieClip(sq,false,true,'landscape',480,320, AppDisplayObject.NEAREST);
+			var bmImageL:BMImage = appScheme.removeChildByName("leftRect") as BMImage;
+			var bmImageR:BMImage = appScheme.removeChildByName("rightRect") as BMImage;
 			
-			var image:BMImage = appScheme.getChildByName("testRect") as BMImage
+			var buttonL:BMButton= appScheme.getChildByName("left") as BMButton;			
+			var buttonR:BMButton = appScheme.getChildByName("right") as BMButton
 			//apply a new larger hit rect to the button.
-			button.hitRect=image.rect;
-	
+			buttonL.hitRect=bmImageL.rect;
+			buttonR.hitRect=bmImageR.rect;
 			// Add controls to the list of schemes.
 			bm.session.registry.validateAndAddControlXML(appScheme.toString());
 			// GO!
 			bm.start();
 
-			bm.session.getSlotDisplay().x=20;
-			bm.session.getSlotDisplay().y=20;
+			bm.session.getSlotDisplay().x=10;
+			bm.session.getSlotDisplay().y=10;
 			
 			addChild(bm.session.getSlotDisplay());
 		}
@@ -84,10 +87,5 @@ package
 
 		}
 
-		public function onUnLoaded(de:DeviceEvent):void
-		{
-			de.device.removeEventListener(TouchEvent.TOUCHES_RECEIVED, onTouch);
-			
-		}
 	}
 }

@@ -28,7 +28,7 @@ package
 			bm.addEventListener(DeviceEvent.DEVICE_DISCONNECTED, onUnLoaded);
 			
 			stage.frameRate=60;
-			// A square scheme to be held in landscape mode.
+			
 			var sq:SampleDemoScheme=new SampleDemoScheme();
 			
 
