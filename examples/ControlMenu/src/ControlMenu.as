@@ -38,6 +38,10 @@ package
 		 */		
 		public var menu:BMContextMenu ;
 		/**
+		 * Menu Item for toggling Music 
+		 */		
+		public var toggleMusicOption:BMContextMenuOption;
+		/**
 		 * A secondary scheme context menu. 
 		 */		
 		public var settingsMenu:BMContextMenu;
@@ -77,30 +81,25 @@ package
 			//parse the scheme, and add the actual design orientation, width and height.
 			appScheme = BMControls.parseDynamicMovieClip(menuDemoScheme,false,true,'portrait',320,480);
 			
+			//appScheme = BMControls.parseDynamicMovieClip(menuDemoScheme,false,true,'landscape',480,320);
+			
 			//Here we begin to construct our primary control pad menu.
 			//make a new control pad menu context object
 			menu=new BMContextMenu();
 			//Next we will add the context items to the game pad menu.
 			// First a sound off/on pair. 
-			var item1:BMContextMenuOption = new BMContextMenuOption();
+			toggleMusicOption = new BMContextMenuOption();
 			//display text
-			item1.title="Music off";
+			toggleMusicOption.title="Turn Music Off";
 			//icon number.
-			item1.icon=ContextMenuIcon.MusicOff;
+			toggleMusicOption.icon=ContextMenuIcon.MusicOn;
 			//script name.
-			item1.event="soundOff";
+			toggleMusicOption.event="musicToggle";
 			//Pressing will close control menu?
-			item1.close=false;			
+			toggleMusicOption.close=false;
 			
 			//Add the item to the menu
-			menu.addOption(item1);
-			
-			var item2:BMContextMenuOption = new BMContextMenuOption();
-			item2.title="Music on";
-			item2.icon=ContextMenuIcon.MusicOn;
-			item2.event="soundOn";
-			item2.close=false;			
-			menu.addOption(item2);
+			menu.addOption(toggleMusicOption);
 			
 			//next we will set up an option to open up the secondary menu.
 			var item6:BMContextMenuOption = new BMContextMenuOption();
@@ -186,22 +185,35 @@ package
 			
 			switch(event.value)
 			{
-				case "soundOff":
+				case "musicToggle":
 					
-					_volOn=0;
+					// Is the sound on?
+					if(_volOn!=0){
+						_volOn=0;
+						// Change Music Toggle Item text to indicate what 
+						// it will do when pressed the next time
+						toggleMusicOption.title="Turn Music On";
+						// Change the Menu Item Icon to match the current state
+						toggleMusicOption.icon=ContextMenuIcon.MusicOff;
+					} 
+					// Is the sound off?
+					else {
+						_volOn=1;
+						
+						// Change Music Toggle Item text to indicate what 
+						// it will do when pressed the next time
+						toggleMusicOption.title="Turn Music Off";
+						// Change the Menu Item Icon to match the current state
+						toggleMusicOption.icon=ContextMenuIcon.MusicOn;
+					}
+					
+					// Update the control scheme to match new state.
+					lan.session.updateControlScheme(event.device,appScheme.pageToString(1));
+					
 					//update radio volume
 					if(radio.transportStream)	
 						radio.transportStream.soundTransform=new SoundTransform(_volOn);
 				break;
-				
-				case "soundOn":
-					
-					_volOn=1;
-					//update radio volume
-					if(radio.transportStream)	
-						radio.transportStream.soundTransform=new SoundTransform(_volOn);
-						
-					break;	
 				
 				
 				case "settings":
