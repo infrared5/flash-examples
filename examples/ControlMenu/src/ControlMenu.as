@@ -188,7 +188,8 @@ package
 				case "musicToggle":
 					
 					// Is the sound on?
-					if(_volOn!=0){
+					if(_volOn!=0)
+					{
 						_volOn=0;
 						// Change Music Toggle Item text to indicate what 
 						// it will do when pressed the next time
@@ -197,7 +198,8 @@ package
 						toggleMusicOption.icon=ContextMenuIcon.MusicOff;
 					} 
 					// Is the sound off?
-					else {
+					else 
+					{
 						_volOn=1;
 						
 						// Change Music Toggle Item text to indicate what 
