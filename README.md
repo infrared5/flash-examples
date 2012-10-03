@@ -1,4 +1,4 @@
-flash-examples
+Getting Started
 ==============
-Word
-Repository of flash example projects.
+
+Open up docs/index.html in your browser and you'll find an index of examples and tutorials.
