@@ -61,14 +61,12 @@ package
 		
 		protected function onButton(event:DeviceEvent):void
 		{
-			trace(appScheme.pageToString(1));
 			if( event.value.state=="up" )
 			{
 				_page= _page==1?2:1;
 				//page 2 is linear, page one is nearest.
 				bm.session.updateControlScheme(event.device, appScheme.pageToString(_page));
 			}
-			
 		}		
 
 	}
