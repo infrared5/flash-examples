@@ -30,8 +30,6 @@ package
 		{
 
 			
-			
-			
 			addChild(new HitRectDemoScheme());
 			addChild(cursor);
 			stage.frameRate=60;
