@@ -4,6 +4,7 @@ package
 	import com.brassmonkey.controls.BMControls;
 	import com.brassmonkey.controls.writer.AppDisplayObject;
 	import com.brassmonkey.controls.writer.AppScheme;
+	import com.brassmonkey.controls.writer.StageScaler;
 	import com.brassmonkey.devices.messages.Touch;
 	import com.brassmonkey.events.DeviceEvent;
 	import com.brassmonkey.events.TouchEvent;
@@ -14,40 +15,33 @@ package
 	[SWF(width="768", height="768")]
 	public class SampleDemo extends Sprite
 	{
-		public var delta:Number=new Date().time;
-		public var bm:BMApplication;
-		public var curesor:Reticle=new Reticle;
+		
+		public var bm:BMApplication;		
 		public var appScheme:AppScheme;
+		private var _page:int = 1;
+		
 		public function SampleDemo()
 		{
 		
 
 			bm= new BMApplication(loaderInfo.parameters);
 			bm.initiate("Sample demo", 1);
+			//respond to device loaded events to add button handlers.
 			bm.addEventListener(DeviceEvent.DEVICE_LOADED, onLoaded);
-			bm.addEventListener(DeviceEvent.DEVICE_DISCONNECTED, onUnLoaded);
+			
 			
 			stage.frameRate=60;
 			
-			var sq:SampleDemoScheme=new SampleDemoScheme();
+			var sq:TinyScheme = new TinyScheme();
 			
-
-
+			//the stage scaler is to set the size of the screen that the controls are designed for.
+			StageScaler.LONG = 98;
+			StageScaler.SHORT = 64;
+			//The vallues used for width and height when parsing the movie clip is the displayed size within the screen size.			
 			//parse the scheme, and add the actual design orientation, width and height.
-			appScheme = BMControls.parseDynamicMovieClip(sq,false,false,'landscape' );
-			
-			//Get and remove the rectangles we will stretch the graphics to.
-			var image1:AppDisplayObject= appScheme.removeChildByName("stretchTo1");
-			var image2:AppDisplayObject= appScheme.removeChildByName("stretchTo2");
-			// get the item and apply the sample mode and rectangle
-			var linear:AppDisplayObject= appScheme.getChildByName("linear");
-			linear.sample=AppDisplayObject.LINEAR;
-			linear.rect=image1.rect;
-			// get the item and apply the sample mode and rectangle
-			var nearest:AppDisplayObject= appScheme.getChildByName("nearest");
-			nearest.sample=AppDisplayObject.NEAREST;
-			nearest.rect=image2.rect;
-			
+			appScheme = BMControls.parseDynamicMovieClip(sq,false,false,'portrait', 64,98, AppDisplayObject.NEAREST);
+			// on the second frame, there is a object we will specify as linear to show the difference it makes.
+			appScheme.getChildByName("buttonB").sample = AppDisplayObject.LINEAR;
 			// Add controls to the list of schemes.
 			bm.session.registry.validateAndAddControlXML(appScheme.toString());
 			// GO!
@@ -57,31 +51,25 @@ package
 			bm.session.getSlotDisplay().y=20;
 			addChild(bm.session.getSlotDisplay());
 		}
-		public function onTouch(de:TouchEvent):void
-		{
-			var now:Number=new Date().time;
-			trace((now-delta));
-			delta=now
-			
-			for each (var touch:Touch in de.touches.touches)
-			{
-				//trace(curesor.x,touch.y,touch.phase.toString());
-				curesor.y=touch.y;
-				curesor.x=touch.x;
-			}
-		}		
+
+		
 		public function onLoaded(de:DeviceEvent):void
 		{
-			de.device.addEventListener(TouchEvent.TOUCHES_RECEIVED, onTouch);
-			flash.utils.setTimeout(bm.session.setTouchInterval,200,de.device,1/15);
-			//bm.session.setTouchInterval(de,1/24);
+			//add handler for toggling between nearest and linear sampl modes.
+			de.device.addEventListener(DeviceEvent.SCHEME_BUTTON, onButton);	
 		}
 		
-
-		public function onUnLoaded(de:DeviceEvent):void
+		protected function onButton(event:DeviceEvent):void
 		{
-			de.device.removeEventListener(TouchEvent.TOUCHES_RECEIVED, onTouch);
+			trace(appScheme.pageToString(1));
+			if( event.value.state=="up" )
+			{
+				_page= _page==1?2:1;
+				//page 2 is linear, page one is nearest.
+				bm.session.updateControlScheme(event.device, appScheme.pageToString(_page));
+			}
 			
-		}
+		}		
+
 	}
 }
