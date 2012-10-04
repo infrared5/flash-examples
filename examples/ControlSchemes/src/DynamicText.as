@@ -4,14 +4,11 @@ package
 	import com.brassmonkey.controls.BMControls;
 	import com.brassmonkey.controls.writer.AppDisplayObject;
 	import com.brassmonkey.controls.writer.AppScheme;
-	import com.brassmonkey.controls.writer.BMButton;
 	import com.brassmonkey.controls.writer.BMDynamicText;
-	import com.brassmonkey.controls.writer.BMImage;
 	import com.brassmonkey.devices.Device;
 	import com.brassmonkey.devices.DeviceCapabilities;
 	import com.brassmonkey.devices.messages.Touch;
 	import com.brassmonkey.devices.messages.TouchPhase;
-	import com.brassmonkey.discovery.DeviceManager;
 	import com.brassmonkey.events.DeviceEvent;
 	import com.brassmonkey.events.TouchEvent;
 	
@@ -77,17 +74,25 @@ package
 			//and it is named.
 			mc.dynamicText.text="Hello "+event.device.deviceName;
 			
+			
+			
 			//make sure its named so it is drawn into the control scheme.
 			bm.session.getSlotDisplay().name="slotColor";
 			//Just for added fun, we will add the host slot color to the control pad.
 			mc.addChild(bm.session.getSlotDisplay());
 			
+			
+			
 			//When generating customized versions of the same display objects, you must allow re-encoding 
 			// to utilize the automated serialization on them. 
 			AppScheme.ALLOW_REENCODING=true;
 			
+			
+			
 			//parse the scheme, and add the actual design orientation, width and height.
 			var appScheme:AppScheme = BMControls.parseDynamicMovieClip(mc,false,true,'landscape',480,320, AppDisplayObject.NEAREST);
+			
+			
 			//add it to the session.
 			bm.session.registry.validateAndAddControlXML(appScheme.toString());
 			
@@ -95,7 +100,8 @@ package
 			//to the client in the initial connection process.
 			event.device.controlSchemeIndex = bm.session.registry.controlSchemes.length -1; 
 			
-			//show our slot color.
+			
+			//add back our slot color.
 			addChild(bm.session.getSlotDisplay());
 		}
 		
@@ -139,6 +145,10 @@ package
 		{
 			trace("onUnLoaded");
 			//send update to connected clients.
+			event.device.removeEventListener(TouchEvent.TOUCHES_RECEIVED, onTouch);	
+			event.device.removeEventListener(DeviceEvent.CAPABILITIES, onCapabilities);
+			event.device.removeEventListener(DeviceEvent.CONTROL_SCHEME_REQUEST, onSchemeRequest);
+			
 			notifyClients();
 		}
 		

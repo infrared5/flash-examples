@@ -5,18 +5,13 @@ package
 	import com.brassmonkey.controls.writer.AppDisplayObject;
 	import com.brassmonkey.controls.writer.AppScheme;
 	import com.brassmonkey.controls.writer.BMButton;
-	import com.brassmonkey.controls.writer.BMDynamicText;
 	import com.brassmonkey.controls.writer.BMImage;
-	import com.brassmonkey.controls.writer.StageScaler;
-	import com.brassmonkey.devices.Device;
 	import com.brassmonkey.devices.messages.Touch;
 	import com.brassmonkey.devices.messages.TouchPhase;
 	import com.brassmonkey.events.DeviceEvent;
 	import com.brassmonkey.events.TouchEvent;
 	
 	import flash.display.Sprite;
-	import flash.utils.setInterval;
-	import flash.utils.setTimeout;
 	
 	[SWF(width="480", height="320")]
 	public class ButtonHitRects extends Sprite
@@ -28,8 +23,6 @@ package
 		
 		public function ButtonHitRects()
 		{
-
-			
 			addChild(new HitRectDemoScheme());
 			addChild(cursor);
 			stage.frameRate=60;
