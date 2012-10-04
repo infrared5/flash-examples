@@ -102,7 +102,7 @@ package
 			}
 			else if(event.value.name=="gas" && event.value.state=="up")
 			{
-				
+				trace(event.device.attributes.localCookie = "moreCookie");
 				event.device.attributes.localCookie = "moreCookie";
 			}
 		}
