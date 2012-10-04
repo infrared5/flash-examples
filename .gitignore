@@ -8,3 +8,7 @@
 
 #OS X Specific Ignores
 .DS_Store
+
+/examples/Cookies/bin-debug
+/examples/SharedResources/control-art/CS5ControlArt.html
+/examples/SharedResources/control-art/CS5ControlArt.swf
