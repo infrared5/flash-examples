@@ -5,3 +5,6 @@
 /examples/.metadata
 /examples/DeviceMotion/bin-debug
 /examples/ControlSchemes/bin-debug
+
+#OS X Specific Ignores
+.DS_Store
