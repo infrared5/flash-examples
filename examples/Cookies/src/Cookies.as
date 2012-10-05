@@ -22,7 +22,7 @@ package
 			addChild(new MonsterTruckControlScheme());
 			
 			stage.frameRate=60;
-			//SettingsManager.SOCKET_SERVER_ADDRESS = "qaregistry.monkeysecurity.com";
+			
 			//initiate brassmonkey
 			lan= new BMApplication(loaderInfo.parameters);
 			lan.initiate("Cookies", 1);
