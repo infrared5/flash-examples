@@ -51,7 +51,7 @@ package
 		private var _volOn:Number = 1;
 	
 		public function ControlMenu()
-		{
+		{			
 			//add the radio skin.
 			addChild(baseSkin);
 			baseSkin.y=25;
@@ -171,15 +171,30 @@ package
 		 */		
 		public function onLoaded(de:DeviceEvent):void
 		{
+			de.device.addEventListener(DeviceEvent.MENU_OPEN, onMenuOpen);
+			de.device.addEventListener(DeviceEvent.MENU_CLOSED, onMenuClosed);
 			//add a listener for a context menu event.
-			de.device.addEventListener(DeviceEvent.CONTEXT_MENU, onMenu);
+			de.device.addEventListener(DeviceEvent.CONTEXT_MENU, onMenuSelect);
+		}
+		
+		protected function onMenuClosed(event:DeviceEvent):void
+		{
+			trace( event.device.controlMenuOpen);
+		
+			
+		}
+		
+		protected function onMenuOpen(event:DeviceEvent):void
+		{
+			trace( event.device.controlMenuOpen);
+			
 		}
 		/**
 		 * The device event value will be the name of the menu item pressed. 
 		 * @param event
 		 * 
 		 */		
-		protected function onMenu(event:DeviceEvent):void
+		protected function onMenuSelect(event:DeviceEvent):void
 		{
 			trace(event.value);
 			
