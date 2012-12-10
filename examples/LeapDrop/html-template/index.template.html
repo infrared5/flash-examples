@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<!-- 
+
+	Brass Monkey SDK
+	LeapDrop
+	This demo shows how to use an external javascript library with brass monkey. 
+	The Leap Motion device provides an excellent interface to add exciting features to the game experience.
+	  
+-->
+
+<script type="text/javascript" src="swfobject.js"></script>
+<script type="text/javascript" src="leap.js"></script>
+
+
+
+<title>${application}</title>
+
+<script>
+
+//Flash calls this after it is loaded and ready for leap data.
+function init() {
+	
+	//create the handlers
+	var leapHandler = function(data){
+			document.getElementById("LeapDrop").onLeapData(data);
+	};
+	
+	var openHandler = function(data){
+			document.getElementById("LeapDrop").onLeapOpen(data);
+	};
+	
+	//create the interface.
+	var leapStream = new LeapMotion("ws://localhost:6437/",leapHandler,openHandler);
+	//start it up
+	leapStream.start();
+	
+};
+
+</script>
+
+
+        <script type="text/javascript">
+            // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+            var swfVersionStr = "${version_major}.${version_minor}.${version_revision}";
+            // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+            var xiSwfUrlStr = "${expressInstallSwf}";
+            var flashvars = {};
+            var params = {};
+            params.quality = "high";
+            params.bgcolor = "${bgcolor}";
+            params.allowscriptaccess = "always";
+            params.allowfullscreen = "true";
+            var attributes = {};
+            attributes.id = "${application}";
+            attributes.name = "${application}";
+            attributes.align = "middle";
+            
+            
+            swfobject.embedSWF(
+                "${swf}.swf", "flashContent", 
+                "${width}", "${height}", 
+                swfVersionStr, xiSwfUrlStr, 
+                flashvars, params, attributes);
+                
+                
+            // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+            swfobject.createCSS("#flashContent", "display:block;text-align:center;");
+</script>
+</head>
+
+<body bgcolor="#86B3DD">
+
+        <div id="flashContent">
+            <p>
+                To view this page ensure that Adobe Flash Player version 
+                ${version_major}.${version_minor}.${version_revision} or greater is installed. 
+            </p>
+        </div>
+</body>
+</html>
