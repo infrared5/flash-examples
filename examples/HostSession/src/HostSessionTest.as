@@ -61,7 +61,7 @@ package
 			
 			lan=new BMApplication(loaderInfo.parameters);
 			
-			lan.initiate("My account",1,"a65971f24694b9c47a9bcd01");
+			lan.initiate("My account",1);
 			
 			lan.session.registry.validateAndAddControlXML(BMControls.parseDynamicMovieClip(new MovieClip(),false,false).toString());
 			
