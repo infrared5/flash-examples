@@ -20,7 +20,7 @@ package
 	 * This demo shows how to listen for trial-mode events so that your application 
 	 * can be aware of which devices have paid for premium content. 
 	 * Developers who sign up for an account can configure their games as premium content 
-	 * with prices per session-and 'buy forever' options you can configure.
+	 * with prices per session-and 'buy forever' options.
 	 * 
 	 * @author Andy Shaules
 	 * 
@@ -147,7 +147,6 @@ package
 		}
 		/**
 		 * Create a simple button 
-		 * @param btnName
 		 * 
 		 */		
 		public function createButton():void
