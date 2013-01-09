@@ -1,39 +1,293 @@
 <!DOCTYPE html>
 <html>
   <head>
+  	<meta http-equiv="refresh" content="5">
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <title>Flash-examples by brassmonkey</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/shared.css">
+    <title>Flash - Brass Monkey SDK</title>
   </head>
 
   <body>
+  
+  <div class="header-wrapper">
+    <div class="header">
+      <div class="logo">
+        <a href="/"><img src="images/logo.png"/></a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="cookie-crumbs-wrapper">
+    <div class="cookie-crumbs"> 
+    <span><a href="http://playbrassmonkey.com/developers/">Developer SDKs</a></span>  <span>> Flash</span>
+    </div>
+  </div>
+    
+      <div class="content">
+    	<div class="sub-header">
+     	<img class="logo" height="72" src="images/flashLogo.png"/>
+      <h1>Flash SDK</h1>
+      <h2>Documentation and examples.</h2>
+    </div>
+ <img class="separator" src="images/separator.png"/>
 
-    <header>
-      <div class="container">
-        <h1>Flash-examples</h1>
-        <h2>Brass Monkey Flash</h2>
-
-        <section id="downloads">
+    <div class="container">
+     <div class="sdk-intro">
+      
+        <p>Welcome to the Brass Monkey Flash SDK portal. 
+      	 Below you will find documentation, demos, and reference links. 
+      	</p>
+       <h1>Resources</h1>
+        <br />
+      <br />
+      
+        <h2>SDK</h2>       
           <a href="https://github.com/brassmonkey/flash-examples/zipball/master" class="btn">Download as .zip</a>
           <a href="https://github.com/brassmonkey/flash-examples/tarball/master" class="btn">Download as .tar.gz</a>
           <a href="https://github.com/brassmonkey/flash-examples" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+         <br />
+          <br />
 
-    <div class="container">
-      <section id="main_content">
-        <p>Brass Monkey</p>
-	<p><a href="http://brassmonkey.github.com/flash-examples/docs/">Developers Pages</a></p>
-        <p><a href="http://brassmonkey.github.com/flash-examples/asdoc/">ASDocs</a></p>
-      </section>
+                
+        <h2>Documents</h2>
+        	
+        <p><a href="BrassMonkeyIn20Minutes.pdf">Brass Monkey In 20 Minutes</a> <br />The Boot Camp companion document</p>        
+        
+        <p><a href="docs/UsingDynamicControlsWithFlash.pdf">Dynamic Controls</a><br />The Control Scheme companion document. Understanding brass monkey controls. From the most minimal controls, to the extreme.</p>
+        
+        <p><a href="asdoc">ASDocs</a>  <br />Auto-generated class documentation.</p>
+        
+        <br />
+        <h2>External Links</h2>
+        <p><a href="http://groups.google.com/group/brassmonkey-sdk"><strong>Brass Monkey SDK mailing list.</strong></a>
+        <br />Join the mailing list and help our community grow.
+        </p>
+     
     </div>
-
     
+ 
+    <img class="separator" src="images/separator.png"/>
+
+    <div class="examples" id="examples">
+    <h1>Examples</h1>
+    <br />
+    
+    
+       <a class="example" href="https://github.com/brassmonkey/flash-examples/blob/master/examples/BootCamp/BrassMonkeyFlash.as">
+          <div class="wrapper">
+            <img class="logo" src="images/flashLogo.png"/>
+            <div class="example-info">
+              <h1>Boot Camp</h1>
+              <p>Boot Camp  explains some basic concepts about brass monkey.  How it uses the flash eventing system and client-handlers. 20 minutes is the expected time for developers who are using an API for the first time. Just like working with FMS  or any other asynchronous service for the first time, there are a few basic things to go over. The two tutorials are  1)a simple gravity controlled drawing application and 2)a monkey animation that dances with your device's  position(its creepy). See: Brass Monkey In 20 Minutes</p>
+
+              <img class="launch" src="shared/images/launch-app-button.png"/>
+            </div>
+            <div class="clear"></div>
+          </div>          
+       </a>
+       
+ 	<img class="separator" src="images/separator.png"/>
+
+       <div class="example">
+          <div class="wrapper">
+            <img class="logo" src="images/flashLogo.png"/>
+            <div class="example-info">
+              <h1>Control Schemes</h1>
+  				<p>Several different topics related to Control Schemes are covered. From advanced methods that  change the Hit Rects  of the  buttons or   alter the Sample Mode used while scaling to the different screen sizes, to the text components and aspect ratio API that help your design to be presented in the best possible way. </p>
+                
+                <a class="example" href="docs/button-hit-rect/button-hit-rect.html">
+                <h2>Hit Rects</h2>
+  					<p>This example shows how to setup a button that has a sensor-area larger than it's' visual size.</p>
+  				</a>
+  				<a class="example" href="tryit/ButtonHitRects.html"><p><i><u>Try the demo</u></i></p></a><br />
+  				
+  				<a class="example" href="docs/image-sample-modes/image-sample-modes.html">
+  				<h2>Image Sample Modes</h2>
+   					<p>Button and controls graphics may be scaled to fit different screen sizes. There are two ways to designate how they are interpolated. 
+   					This demo sets up a dramatically scaled button and allows you to toggle the image resampling-mode by pressing it.</p>
+   				</a>
+   				<a class="example" href="tryit/SampleDemo.html"><p><i><u>Try the demo</u></i></p></a><br />
+   				<a class="example" href="https://github.com/brassmonkey/flash-examples/blob/master/examples/ControlSchemes/src/AspectRatio.as">
+   				
+   				<h2>Aspect Ratio API</h2>
+   					<p>An in-line explanation of the aspect ratio API within a simple demo to help get your designs to look correctly on different screen sizes. 
+   					It also explains how your design coordinates will define the finger-touch values received across all screen sizes.</p>
+   				</a>
+   				
+   				<a class="example" href="tryit/AspectRatio.html"><p><i><u>Try the demo</u></i></p></a><br />
+   				
+   				<a class="example" href="https://github.com/brassmonkey/flash-examples/blob/master/examples/ControlSchemes/src/DynamicText.as">
+   				<h2>Text Components</h2>
+   					<p>An explanation of the two ways to put text on the control design, as well as creating control designs as devices connect and customized at run-time.</p>
+    			</a>
+    			<a class="example" href="tryit/DynamicText.html"><p><i><u>Try the demo</u></i></p></a><br />
+    			
+    			<a class="example" href="https://github.com/brassmonkey/flash-examples/blob/master/examples/ControlSchemes/src/Cards.as">
+    			<h2>Poker Cards</h2>
+   					<p>One of the more advanced methods of the AppScheme object that allows you to replace image data of a button or image component.</p>
+   					</a>
+   				<a class="example" href="tryit/Cards.html"><p><i><u>Try the demo</u></i></p></a><br />
+   				
+              <img class="launch" src="shared/images/launch-app-button.png"/>
+            </div>
+            <div class="clear"></div>
+          </div>          
+       </div>
+        <img class="separator" src="images/separator.png"/>
+       
+       <div class="example">
+          <div class="wrapper">
+            <img class="logo" src="images/flashLogo.png"/>
+            <div class="example-info">
+   				<a class="example" href="https://github.com/brassmonkey/flash-examples/blob/master/examples/DeviceMotion/src/DeviceMotion.as">
+   				<h1>DeviceMotion</h1>
+  				<p>This example shows how to enable and receive Accelerometer, Gyroscope, Orientation, and Shake events.</p>
+   					</a>
+  				 <a class="example" href="tryit/DeviceMotion.html"><p><i><u>Try the demo</u></i></p></a><br />
+  	
+              <img class="launch" src="shared/images/launch-app-button.png"/>
+            </div>
+            <div class="clear"></div>
+          </div>          
+       </div>
+     
+ 	<img class="separator" src="images/separator.png"/>
+
+
+       <div class="example" href="examples/basics/index.html">
+          <div class="wrapper">
+            <img class="logo" src="images/flashLogo.png"/>
+            <div class="example-info">
+            	<a class="example" href="https://github.com/brassmonkey/flash-examples/blob/master/examples/ControlMenu/src/ControlMenu.as">
+   				<h1>Control Menu</h1>
+  					<p>The client control pad has a context menu that you can script with. You can add setting menus or sound control buttons. </p>
+    				</a>	
+  					 <a class="example" href="tryit/ControlMenu.html"><p><i><u>Try the demo</u></i></p></a><br />
+              <img class="launch" src="shared/images/launch-app-button.png"/>
+            </div>
+            <div class="clear"></div>
+          </div>          
+       </div>
+       
+       
+ 	<img class="separator" src="images/separator.png"/>
+
+
+       <div class="example">
+          <div class="wrapper">
+            <img class="logo" src="images/flashLogo.png"/>
+            <div class="example-info">
+            <a class="example" href="https://github.com/brassmonkey/flash-examples/blob/master/examples/Cookies/src/Cookies.as">
+   				<h1>Cookies</h1>
+  					<p>  The Brass Monkey API includes three persistence methods for setting and reading session attributes. 
+  					The first method is purely host-side, and can be written to and read from synchronously without delay. The second method is client-side and persists between sessions. 
+  					The third method is server side and covered in the Host Sessions demo.</p>   	 					
+              </a>
+              
+              <img class="launch" src="shared/images/launch-app-button.png"/>
+            </div>
+            <div class="clear"></div>
+          </div>          
+       </div>
+	<img class="separator" src="images/separator.png"/>
+       
+       <a class="example" href="examples/basics/index.html">
+          <div class="wrapper">
+            <img class="logo" src="images/flashLogo.png"/>
+            <div class="example-info">
+   				<a class="example" href="https://github.com/brassmonkey/flash-examples/blob/master/examples/DPad/src/DPad.as">
+   				<h1>D-Pad</h1>
+  					<p>A D-pad control design to help get you started.</p>   	 		
+  					</a>			
+             <a class="example" href="tryit/DPad.swf"><p><i><u>Try the demo</u></i></p></a><br />
+             <img class="launch" src="shared/images/launch-app-button.png"/>
+            </div>
+            <div class="clear"></div>
+          </div>          
+       </a>
+
+ <img class="separator" src="images/separator.png"/>
+
+       <div class="example" href="examples/basics/index.html">
+          <div class="wrapper">
+            <img class="logo" src="images/flashLogo.png"/>
+            <div class="example-info">
+            <a class="example" href="https://github.com/brassmonkey/flash-examples/blob/master/examples/Invawayders/src/BrassMonkeyAgent.as">
+   				<h1>Invaywayders</h1>
+  					<p>A demo taken from the official Adobe Gaming SDK and given brass monkey controls.</p>   	 					
+              </a>
+              <a class="example" href="tryit/Main.html"><p><i><u>Try the demo</u></i></p></a><br />
+              <img class="launch" src="shared/images/launch-app-button.png"/>
+            </div>
+            <div class="clear"></div>
+          </div>          
+       </div>
+        <img class="separator" src="images/separator.png"/>
+       
+       <a class="example" href="https://github.com/brassmonkey/flash-examples/blob/master/examples/LeapDrop/src/LeapDrop.as">
+          <div class="wrapper">
+            <img class="logo" src="images/flashLogo.png"/>
+            <div class="example-info">
+   				<h1>Leap Drop</h1>
+  					<p>A two player demo game. One player is a mad bomber, and the other player is a bomb-catching bucket. 
+  					In addition to showing basic two-player logic, the javascript portion of the demo looks for a Leap-Motion hand-detection device, 
+  					and alows the bomber's left-right movements to be controlled by hand gestures.</p>   	 					
+              <img class="launch" src="shared/images/launch-app-button.png"/>
+            </div>
+            <div class="clear"></div>
+          </div>          
+       </a>
+ <img class="separator" src="images/separator.png"/>
+
+       <a class="example" href="https://github.com/brassmonkey/flash-examples/blob/master/examples/TrialMode/src/TrialMode.as">
+          <div class="wrapper">
+            <img class="logo" src="images/flashLogo.png"/>
+            <div class="example-info">
+   				<h1>Trial Mode</h1>
+  					<p>Registered developers are able to offer premium content, and allow trial play or restrict assets.</p>   	 					
+              <img class="launch" src="shared/images/launch-app-button.png"/>
+            </div>
+            <div class="clear"></div>
+          </div>          
+       </a>
+        <img class="separator" src="images/separator.png"/>
+       
+       <div class="example" >
+          <div class="wrapper">
+            <img class="logo" src="images/flashLogo.png"/>
+            <div class="example-info">
+   				<a class="example"  href="https://github.com/brassmonkey/flash-examples/blob/master/examples/HostSession/src/HostSessionTest.as">
+   				<h1>The Host Session</h1>
+  					<p>Here we show how to get the user profile-icon. When your device connects to the host, it retrieves the icon you have picked.
+  					Registered developers are also able to create a secondary host session with their secret api key. 
+  					The secondary session allows you to have micro-transactions in game and offer incentives 
+  					(such as poker chips) that persist between games</p>   	 					
+              </a>
+              <a class="example" href="tryit/HostSessionTest.html"><p><i><u>Try the demo</u></i></p></a><br />
+              <img class="launch" src="shared/images/launch-app-button.png"/>
+            </div>
+            <div class="clear"></div>
+          </div>          
+       </div>
+	<img class="separator" src="images/separator.png"/>
+
+    </div>
+    </div>
+     </div>
+       <div class="footer">
+    <div class="tabs">
+      <a class="current" href="http://playbrassmonkey.com">Play games now </a>      
+      <a href="http://playbrassmonkey.com/developers/"> Unity and HTML5 SDKs here </a>
+      <a href="http://playbrassmonkey.com/about"> More about Brass Monkey </a>
+    </div>
+    <div class="copyright">
+      <p>©2013 Brass Monkey. All Rights Reserved.</p>
+    </div>
+  </div>
+     
   </body>
 </html>
