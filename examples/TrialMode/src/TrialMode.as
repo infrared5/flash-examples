@@ -40,10 +40,11 @@ package
 			//initiate the interface with the specific app id you have configured.
 			lan.initiate("Trial Mode Test",1,"bcb5378fa6118f37995aaa2081e094d7");
 			// Listen for device loaded/ready to add button handler.
+			lan.addEventListener(DeviceEvent.DEVICE_AVAILABLE , onDevice);
 			lan.addEventListener(DeviceEvent.DEVICE_LOADED, onDevice);
 			// Listen for the initial moment that the trial-mode is known.
 			lan.addEventListener(DeviceEvent.TRIAL_MODE, onTrialMode);
-			
+			//lan.addEventListener(DeviceEvent.SLOT_DISPLAY_REQUEST, onSlot);
 			lan.addEventListener(DeviceEvent.DEVICE_DISCONNECTED, onDisconnected);
 			
 			//Create a scheme on the fly.
