@@ -66,7 +66,7 @@ html{
   font-size: 28px;
 }
 .sub-header h2{
-  color: #DA6323;
+  color: #EB0F0F;
   font-size: 15px;
 }
 
@@ -82,23 +82,12 @@ html{
 .content{
   background: #0A0A0A;
 }
-
+.examples h1{
+  color: white;
+  font-size: 28px;
+}
 .example{
   width: 732px;
-}
-
-.note{
-  float: right;
-}
-
-.note a{
-  color: #DA6323;
-}
-
-.examples p{
-  color: #efefef;
-  margin:10px 0px 10px 0px;
-  line-height: 20px; 
 }
 
 .example .wrapper{
@@ -126,8 +115,12 @@ html{
   border-bottom-right-radius: 10px;
 }
 .example h1{
-  color: white;
+  color: #efefef;
   font-size: 26px;
+}
+.example h2{
+  color: #efefef;
+  font-size: 18px;
 }
 .example p{
   color: #afafaf;
@@ -234,7 +227,9 @@ a.example{
   padding-top: 25px;
   margin: 0 10px;
 }
-
+.sdk h2{
+  color: white;
+}
 .sdk p{
   color: #9f9f9f;
   font-size: 11px;
@@ -280,8 +275,8 @@ a.example{
   
 }
 
-.sdk-intro h1,.section-header{
-  color: white;
+.sdk-intro h1{
+  color: #FEFEFE;
   padding: 0px 0px 0px 0px;
   position: relative;
   top: 10px;
@@ -289,21 +284,19 @@ a.example{
   clear: both;
 }
 
-.section-header{
-  padding-bottom: 20px;
-}
-
 .sdk-intro h2{
+	color: #afafaf;
+	font-size: 20px;
 }
 
 .sdk-intro p{
-  color: #efefef;
+ color: #FEFEFE;
   margin:10px 0px 10px 0px;
   line-height: 20px; 
 }
 .sdk-intro a{
-  color: #DA6323;
-  font-size: 98%;
+  color: #EB0F0F;
+  font-size: 16px;
 }
 
 .sdk-intro .download,.demo .download{
@@ -311,7 +304,7 @@ a.example{
   height: 22px;
   line-height: 22px;
   background: #B54C1D;
-  color: white;
+  color: #EFEFEF;
   text-decoration: none;
   padding: 10px;
   font-size: 12px;
