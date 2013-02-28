@@ -8,56 +8,32 @@ package com.brassmonkey
 	 */
 	public class LeapPalm
 	{
-		public var radius:Number;
 		
-		public var center:Vector3D=new Vector3D();
+		public var sphereRadius:Number;
 		
-		public var direction:Vector3D=new Vector3D();
+		public var sphereCenter:Array=[];
 		
-		public var normal:Vector3D=new Vector3D();
+		public var direction:Array=[];
 		
-		public var position:Vector3D=new Vector3D();
+		public var normal:Array=[];
 		
-		public var velocity:Vector3D=new Vector3D();
+		public var palmPosition:Array=[];
+		
+		public var palmVelocity:Array=[];
+		
+		public var palmNormal:Array=[];
 
+		
 		public static function create(obj:Object):LeapPalm
 		{
 			var ret:LeapPalm=new LeapPalm();
 			
 			for(var prop:String in obj)	
 			{
-			
-				if(prop =='radius')
+				trace(prop, obj[prop]);
+				if(ret.hasOwnProperty(prop))
 				{
-					ret.radius=obj[prop];
-				}
-				else if(prop =='ball')
-				{
-					var ballInfo:Object=obj[prop];
-					
-					for(var info:String in ballInfo)	
-					{
-						
-						if(info =='radius')
-						{
-							ret.radius=ballInfo[info];
-						}
-						else if(prop =='center')
-						{
-							var bNums:Array=ballInfo[info];		
-							ret[prop].x=bNums[0];
-							ret[prop].y=bNums[1];
-							ret[prop].z=bNums[2];	
-						}
-					}
-					
-				}
-				else
-				{
-					var nums:Array=obj[prop];		
-					ret[prop].x=nums[0];
-					ret[prop].y=nums[1];
-					ret[prop].z=nums[2];			
+					ret[prop]=obj[prop];
 				}
 			}
 			

@@ -9,15 +9,15 @@ package com.brassmonkey
 	{
 		public var id:int;
 		
-		public var palm:LeapPalm
+		public var palm:LeapPalm=new LeapPalm();
 		
-		public var fingers:Vector.<LeapFinger>=new Vector.<LeapFinger>();
+		public var pointables:Vector.<LeapFinger>=new Vector.<LeapFinger>();
 		
 		public function getFiner(id:int):LeapFinger
 		{
-			if(fingers.length>id)
+			if(pointables.length>id)
 			{
-				return fingers[id];
+				return pointables[id];
 			}
 			return null;
 		}
@@ -26,24 +26,26 @@ package com.brassmonkey
 		{
 			var ret:LeapHand=new LeapHand();
 			
+			ret.palm=LeapPalm.create(obj);
+			
+
 			for(var prop:String in obj)
 			{				
-				if(prop=="fingers" )
+				trace(prop,obj[prop]);
+				if(prop =='pointables')
 				{
-					var fingers:Array=obj[prop];
 					
-					for (var h:int=0;h< fingers.length;h++)
+					if( obj[prop].length > 0 )
 					{
-						ret.fingers.push(LeapFinger.create(	fingers[h]));						
-					}					
-				}
-				else if(prop=="palm" )
-				{
-					ret.palm=LeapPalm.create(obj[prop]);
-				}
-				else
-				{					
-					ret[prop]=obj[prop];
+						
+						for( var j:int = 0; j < obj[prop].length; j++ )
+						{                          
+							var pointable:LeapFinger =LeapFinger.create( obj[prop][j]);
+							ret.pointables.push(pointable);
+							
+						}
+					}
+					
 				}
 			}
 			return ret;

@@ -194,19 +194,15 @@ package
 			}
 			scores._bomberPlayerName.text="Leap-Motion";
 			
-			for(var e:int=0;e< leapFrame.hands.length;e++)
-			{
-				var hand:LeapHand = leapFrame.getHand(e);
-				if(hand.id<0)
-					continue;
+
 				
-				if(hand.fingers.length)
+				if(leapFrame.pointables.length)
 				{
-					var finger:LeapFinger=hand.getFiner(0);
-					bomberDirection =finger.tip.position.x/10.0;
+					var finger:LeapFinger=leapFrame.pointables[0];
+					bomberDirection =finger.tipPosition.x/10.0;
 
 				}
-			}
+			
 		}
 		
 		protected function onFrame(event:Event):void
