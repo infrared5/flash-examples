@@ -69,7 +69,10 @@ html{
   color: #DA6323;
   font-size: 15px;
 }
-
+.example h2{
+  color: #efefef;
+  font-size: 18px;
+}
 .sub-header .logo{
   float: left;
   margin-right: 14px;
@@ -294,6 +297,8 @@ a.example{
 }
 
 .sdk-intro h2{
+  color: white;
+  font-size: 15px;
 }
 
 .sdk-intro p{
