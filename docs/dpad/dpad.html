@@ -1,0 +1,667 @@
+<html>
+<head>
+<title>Dpad-doc-copy</title>
+<style type="text/css">
+@font-face {
+  font-family: 'Consolas';
+  font-style: normal;
+  font-weight: 400;
+}
+
+ol {
+	margin: 0;
+	padding: 0
+}
+
+.c11 {
+	max-width: 468pt;
+	background-color: #ffffff;
+	padding: 72pt 72pt 72pt 72pt
+}
+
+.c0 {
+	font-size: 10pt;
+	font-family: "Consolas"
+}
+
+.c8 {
+	color: #6699cc;
+	font-weight: bold
+}
+
+.c9 {
+	color: #990000;
+	font-weight: bold
+}
+
+.c5 {
+	font-size: 10pt;
+	font-family: "Verdana"
+}
+
+.c1 {
+	height: 11pt;
+	direction: ltr
+}
+
+.c10 {
+	padding-top: 24pt;
+	padding-bottom: 6pt
+}
+
+.c6 {
+	color: #0033ff;
+	font-weight: bold
+}
+
+.c4 {
+	font-size: 24pt;
+	font-weight: bold
+}
+
+.c7 {
+	color: #009900;
+	font-style: italic
+}
+
+.c3 {
+	font-size: 10pt;
+	font-family: "Courier New"
+}
+
+.c14 {
+	color: #339966;
+	font-weight: bold
+}
+
+.c12 {
+	margin: 5px;
+	border: 1px solid black
+}
+
+.c13 {
+	line-height: 1.0
+}
+
+.c2 {
+	direction: ltr
+}
+
+.title {
+	padding-top: 0pt;
+	line-height: 1.15;
+	text-align: left;
+	color: #000000;
+	font-size: 21pt;
+	font-family: "Trebuchet MS";
+	padding-bottom: 0pt
+}
+
+.subtitle {
+	padding-top: 0pt;
+	line-height: 1.15;
+	text-align: left;
+	color: #666666;
+	font-style: italic;
+	font-size: 13pt;
+	font-family: "Trebuchet MS";
+	padding-bottom: 10pt
+}
+
+li {
+	color: #000000;
+	font-size: 11pt;
+	font-family: "Arial"
+}
+
+p {
+	color: #000000;
+	font-size: 11pt;
+	margin: 0;
+	font-family: "Arial"
+}
+
+h1 {
+	padding-top: 10pt;
+	line-height: 1.15;
+	text-align: left;
+	color: #000000;
+	font-size: 16pt;
+	font-family: "Trebuchet MS";
+	padding-bottom: 0pt
+}
+
+h2 {
+	padding-top: 10pt;
+	line-height: 1.15;
+	text-align: left;
+	color: #000000;
+	font-size: 13pt;
+	font-family: "Trebuchet MS";
+	font-weight: bold;
+	padding-bottom: 0pt
+}
+
+h3 {
+	padding-top: 8pt;
+	line-height: 1.15;
+	text-align: left;
+	color: #666666;
+	font-size: 12pt;
+	font-family: "Trebuchet MS";
+	font-weight: bold;
+	padding-bottom: 0pt
+}
+
+h4 {
+	padding-top: 8pt;
+	line-height: 1.15;
+	text-align: left;
+	color: #666666;
+	font-size: 11pt;
+	text-decoration: underline;
+	font-family: "Trebuchet MS";
+	padding-bottom: 0pt
+}
+
+h5 {
+	padding-top: 8pt;
+	line-height: 1.15;
+	text-align: left;
+	color: #666666;
+	font-size: 11pt;
+	font-family: "Trebuchet MS";
+	padding-bottom: 0pt
+}
+
+h6 {
+	padding-top: 8pt;
+	line-height: 1.15;
+	text-align: left;
+	color: #666666;
+	font-style: italic;
+	font-size: 11pt;
+	font-family: "Trebuchet MS";
+	padding-bottom: 0pt
+}
+</style>
+</head>
+<body class="c11">
+	<h1 class="c2 c10">
+		<span class="c4">Activating The Built In D-pad</span>
+	</h1>
+	<p class="c2">
+		<span class="c3">Brass Monkey includes a D-pad component that
+			can be activated. The d-pad&nbsp;component
+			saves the developer time when creating this common arrangement of
+			directional buttons. A pre-made set of d-pad graphics is included and
+			they can be replaced at run-time. The D-pad is the component on a
+			game controller that you use to navigate your game-avatar/cursor, and
+			is often coupled with &#39;action&#39; buttons to jump or attack. The
+			data stream that a host receives from the device is a Point with x/y
+			values that is broadcast on changes to the user input. It combines
+			characteristics of touch events and buttons to streamline a
+			frequently coded user interface.</span>
+	</p>
+	<p class="c1">
+		<span class="c3"></span>
+	</p>
+	<p class="c2">
+		<span class="c3">In this demo, we will build a control scheme
+			from scratch, and replace the built in graphics with bitmaps created
+			from simple movie-clips. The bitmaps could be from any source
+			security domain allows.</span>
+	</p>
+	<p class="c1">
+		<span class="c3"></span>
+	</p>
+	<p class="c2">
+		<span class="c0 c7">//setting up a scheme manually for screen
+			resolution 480 x 320</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StageScaler.LONG=480;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StageScaler.SHORT=320;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StageScaler.SetLandscape();</span>
+	</p>
+	<p class="c2">
+		<span class="c0 c7">//creating a control scheme that fully
+			fills the screen resolution.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scheme=</span><span
+			class="c0 c6">new</span><span class="c0">&nbsp;AppScheme(480,320,</span><span
+			class="c0 c9">&quot;landscape&quot;</span><span class="c0">,</span><span
+			class="c0 c6">false</span><span class="c0">,</span><span
+			class="c0 c6">false</span><span class="c0">,</span><span
+			class="c0 c9">&quot;linear&quot;</span><span class="c0">);</span>
+	</p>
+	<p class="c2">
+		<span class="c0 c7">//setup rectangles for componentes.</span>
+	</p>
+	<p class="c2">
+		<span class="c0 c7">//We&#39;ll Create separate visual and hit
+			rectangles for each one except the background</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c8">var</span><span class="c0">&nbsp;backgroundRect:Rectangle=</span><span
+			class="c0 c6">new</span><span class="c0">&nbsp;Rectangle(0,0,480,320);</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c8">var</span><span class="c0">&nbsp;dpadTouchRect:Rectangle=</span><span
+			class="c0 c6">new</span><span class="c0">&nbsp;Rectangle(12,20,252,282);</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c8">var</span><span class="c0">&nbsp;dpadVisibleRect:Rectangle=</span><span
+			class="c0 c6">new</span><span class="c0">&nbsp;Rectangle(44,75,180,180);</span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c2">
+		<span class="c3">With the rectangles laid out, create the
+			components.</span>
+	</p>
+	<p class="c1">
+		<span class="c3"></span>
+	</p>
+	<p class="c2">
+		<span class="c0 c7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//create
+			a background with pre-made movie clip.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c8">var</span><span class="c0">&nbsp;bg:BMImage=</span><span
+			class="c0 c6">new</span><span class="c0">&nbsp;BMImage(StageScaler.ScaleFlashRect(backgroundRect,</span><span
+			class="c0 c6">true</span><span class="c0">)</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,</span><span
+			class="c0 c6">new</span><span class="c0">&nbsp;Background());&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bg.name=</span><span
+			class="c0 c9">&quot;background&quot;</span><span class="c0">;</span>
+	</p>
+	<p class="c2">
+		<span class="c0 c7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//The
+			page variable helps with automating view stacks</span>
+	</p>
+	<p class="c2">
+		<span class="c0 c7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//using
+			scheme-page-To-String(i) with dynamic control updates.</span>
+	</p>
+	<p class="c2">
+		<span class="c0 c7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//We
+			want these to all be on the defualt top view, page 1.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bg.page=1;</span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c2">
+		<span class="c0 c7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Add
+			to the control scheme.</span><span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scheme.addChild(bg);</span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c2">
+		<span class="c3">Now create the d-pad component. Use the
+			StageScaler to translate the pixel rectangle to the control scheme
+			rectangle. The hitrect is optional to allow the activation area to be
+			different than the visual area. The dead zone is a percentage of the
+			center that is considered neutral. Setting radial to true will slice
+			the input area like a pie. Setting it to false will calculate input
+			using a tic-tac-tow 3 by 3 grid.</span>
+	</p>
+	<p class="c1">
+		<span class="c3"></span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//create a d-pad.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c8">var</span><span class="c0">&nbsp;dpd:BMDPad= </span><span
+			class="c0 c6">new</span><span class="c0">&nbsp;BMDPad();</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//set scheme frame/page.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.page=1;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//apply rects.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.hitRect=StageScaler.ScaleFlashRect(dpadTouchRect,</span><span
+			class="c0 c6">false</span><span class="c0">);</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.rect=StageScaler.ScaleFlashRect(dpadVisibleRect,</span><span
+			class="c0 c6">false</span><span class="c0">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//alter the size of the dead zone.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.deadZone=30;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//use radial or box mode.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.radial=</span><span
+			class="c0 c6">true</span><span class="c0">;</span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c2">
+		<span class="c5">If the bitmap data is missing for any of these
+			properties below, the client will use the on-board default graphics.
+			The graphics provided for the inactive state and all directions must
+			be the same size, and the active-state for each direction should
+			include the entire d-pad rather than discrete slices.</span>
+	</p>
+	<p class="c1">
+		<span class="c5"></span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//draw movieclips and set bitmap data for the
+			d-pad states.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//inactive/up-state&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.inactive
+			= dpd.draw( </span><span class="c0 c6">new</span><span class="c0">&nbsp;PadImage());</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//direction down, down-state.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.down
+			= dpd.draw(</span><span class="c0 c6">new</span><span class="c0">&nbsp;PadBtnDnDown());</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//direction left, down-state.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.left
+			= dpd.draw(</span><span class="c0 c6">new</span><span class="c0">&nbsp;PadBtnLtDown());</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//direction left-Down, down-state.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.leftDown
+			= dpd.draw(</span><span class="c0 c6">new</span><span class="c0">&nbsp;PadBtnDnLtDown());</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//direction left-Up, down-state.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.leftUp
+			= dpd.draw(</span><span class="c0 c6">new</span><span class="c0">&nbsp;PadBtnUpLtDown());</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//direction right, down-state.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.right
+			= dpd.draw(</span><span class="c0 c6">new</span><span class="c0">&nbsp;PadBtnRtDown());</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//direction right-Down, down-state.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.rightDown=
+			dpd.draw( </span><span class="c0 c6">new</span><span class="c0">&nbsp;PadBtnDnRtDown());</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//direction right-Up, down-state.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.rightUp
+			= dpd.draw(</span><span class="c0 c6">new</span><span class="c0">&nbsp;PadBtnUpRtDown());</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//direction up, down-state.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dpd.up
+			= dpd.draw(</span><span class="c0 c6">new</span><span class="c0">&nbsp;PadBtnUpDown());&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//add to scheme.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scheme.addChild(dpd);</span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c2">
+		<span>To receive d-pad updates from a </span><span>target
+			device, add a d-pad event listener.</span>
+	</p>
+	<p class="c1">
+		<span></span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;device.addEventListener(DeviceEvent.DPAD,
+			onDPad);</span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c2">
+		<span class="c5">The value of the d-pad device event will be a
+			DpadUpdate object. As the client changes the d-pad input, it sends
+			the current direction as a point with x/y values set to -1,0, or 1.
+			The y value -1 represents up and the x value -1 represents left.</span>
+	</p>
+	<p class="c1">
+		<span class="c5"></span>
+	</p>
+	<p class="c1">
+		<span class="c5"></span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c6">protected</span><span class="c0">&nbsp;</span><span
+			class="c0 c14">function</span><span class="c0">&nbsp;onDPad(event:DeviceEvent):</span><span
+			class="c0 c6">void</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c8">var</span><span class="c0">&nbsp;update:DPadUpdate=event.value
+		</span><span class="c0 c6">as</span><span class="c0">&nbsp;DPadUpdate;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//get current d-pad direction intent.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;direction.x=update.x;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;direction.y=update.y;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c7">//process the input.</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process();</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c1">
+		<span class="c0"></span>
+	</p>
+	<p class="c2">
+		<span class="c5">Determining the management of several
+			directional button-states or calculating radial touches within the
+			host is replaced by interpreting a point object.</span>
+	</p>
+	<p class="c1">
+		<span class="c5"></span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c6">public</span><span class="c0">&nbsp;</span><span
+			class="c0 c14">function</span><span class="c0">&nbsp;process():</span><span
+			class="c0 c6">void</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c8">var</span><span class="c0">&nbsp;dir:String=</span><span
+			class="c0 c9">&quot;&quot;</span><span class="c0">;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c6">if</span><span class="c0">(direction.y&lt;0 )</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dir=</span><span
+			class="c0 c9">&quot;n&quot;</span><span class="c0">;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c6">else</span><span class="c0">&nbsp;</span><span
+			class="c0 c6">if</span><span class="c0">(direction.y&gt;0 )</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dir=</span><span
+			class="c0 c9">&quot;s&quot;</span><span class="c0">;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c6">if</span><span class="c0">(direction.x&gt;0 )</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dir+=</span><span
+			class="c0 c9">&quot;e&quot;</span><span class="c0">;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+			class="c0 c6">else</span><span class="c0">&nbsp;</span><span
+			class="c0 c6">if</span><span class="c0">(direction.x&lt;0)</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dir+=</span><span
+			class="c0 c9">&quot;w&quot;</span><span class="c0">;</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+	</p>
+	<p class="c2">
+		<span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+	</p>
+	<p class="c1">
+		<span></span>
+	</p>
+	<p class="c1 c13">
+		<span></span>
+	</p>
+	
+</body>
+</html>
