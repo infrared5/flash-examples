@@ -2,204 +2,223 @@
 {
 	import com.brassmonkey.BMApplication;
 	import com.brassmonkey.SettingsManager;
-	import com.brassmonkey.controls.BMControls;
-	import com.brassmonkey.controls.BMDisplayObject;
-	import com.brassmonkey.controls.writer.AppDisplayObject;
 	import com.brassmonkey.controls.writer.AppScheme;
 	import com.brassmonkey.controls.writer.BMButton;
-	import com.brassmonkey.devices.messages.BMGyro;
-	import com.brassmonkey.devices.messages.BMOrientation;
-	import com.brassmonkey.discovery.DeviceManager;
-	import com.brassmonkey.events.AccelerationEvent;
+	import com.brassmonkey.controls.writer.BMDPad;
+	import com.brassmonkey.controls.writer.BMImage;
+	import com.brassmonkey.controls.writer.StageScaler;
 	import com.brassmonkey.events.DeviceEvent;
-	import com.brassmonkey.events.ShakeEvent;
+	import com.brassmonkey.externals.DPadUpdate;
 	
-	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
 	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.filters.GlowFilter;
-	import flash.geom.Orientation3D;
-	import flash.geom.Rectangle;
-	import flash.geom.Vector3D;
-	import flash.media.Sound;
-	import flash.media.SoundTransform;
-	import flash.net.FileReference;
-	import flash.text.TextField;
-	import flash.utils.ByteArray;
-	import flash.utils.getQualifiedClassName;
-	import flash.utils.setTimeout;
-	
-	import flashx.textLayout.formats.Direction;
 	import flash.geom.Point;
-	
-
+	import flash.geom.Rectangle;
+	import flash.text.TextField;
+	[SWF(width="800", height="600", backgroundColor="000000")]
 	public class DPad extends Sprite
 	{
-		public var pad:DPadScheme=new DPadScheme();
+		//public var pad:DPadScheme=new DPadScheme();
 		public var lan:BMApplication;
-		public var gText:TextField = new TextField();
-		public var oText:TextField = new TextField();
-		[Embed(source="on.mp3")]
-		public var sound:Class;
-		[Embed(source="off.mp3")]
-		public var sound2:Class;
-		private static var avId:int=Math.round(Math.random()*99999+11111);
-		
-		
+
+		public var display_dpad:DisplayDPad=new DisplayDPad();
+				
+		private var scheme:AppScheme;
+		private var direction:Point=new Point();
+		public var _feedback:TextFeedback=new TextFeedback();
+
 		public function DPad()
 		{
+			_feedback.x=128;
+			_feedback.y=500;			
 			display_dpad.stop();
+			addChild(display_dpad);
+			addChild(_feedback);
+			display_dpad.x=400;
+			display_dpad.y=300;
+			//we require new brass monkey dpad feature.
+			//set minimum version 1.7.0
+			SettingsManager.VERSION_MINIMUM.major=1;			
+			SettingsManager.VERSION_MINIMUM.minor=7;
 			
 			lan=new BMApplication(loaderInfo.parameters);
 			lan.initiate("D-Pad Demo",1);
 			lan.addEventListener(DeviceEvent.DEVICE_LOADED, onDevice);
 			lan.addEventListener(DeviceEvent.DEVICE_DISCONNECTED, onDevice);
 			
-			var scheme:AppScheme=BMControls.parseDynamicMovieClip(pad,false,false,"landscape",480,320,AppDisplayObject.LINEAR);
-			
-			//remove hit rects from display and apply the hit areas  to the buttons.
-			
-			var ul:Rectangle=scheme.removeChildByName("hittopleft").rect;
-			BMButton(scheme.getChildByName("padUpLeft")).hitRect = ul;
-			var u:Rectangle=scheme.removeChildByName("hittop").rect;
-			BMButton(scheme.getChildByName("padUp")).hitRect = u;
-			var ur:Rectangle=scheme.removeChildByName("hittopright").rect;
-			BMButton(scheme.getChildByName("padUpRight")).hitRect = ur;			
-			var r:Rectangle=scheme.removeChildByName("hitright").rect;
-			BMButton(scheme.getChildByName("padRight")).hitRect = r;
-			var dr:Rectangle=scheme.removeChildByName("hitbottemright").rect;
-			BMButton(scheme.getChildByName("padDownRight")).hitRect = dr;
-			var d:Rectangle=scheme.removeChildByName("hitbottem").rect;
-			BMButton(scheme.getChildByName("padDown")).hitRect = d;
-			var dl:Rectangle=scheme.removeChildByName("hitbottemleft").rect;
-			BMButton(scheme.getChildByName("padDownLeft")).hitRect = dl;
-			var l:Rectangle=scheme.removeChildByName("hitleft").rect;
-			BMButton(scheme.getChildByName("padLeft")).hitRect = l;
-			var ha:Rectangle=scheme.removeChildByName("hita").rect;
-			var hb:Rectangle=scheme.removeChildByName("hitb").rect;
-			BMButton(scheme.getChildByName("btnA")).hitRect = ha;
-			BMButton(scheme.getChildByName("btnB")).hitRect = hb;
+			//setting up a scheme manually for screen resolution 480 x 320 
+			StageScaler.LONG=480;
+			StageScaler.SHORT=320;
+			StageScaler.SetLandscape();
+			//creating a control scheme for the above screen resolution.
+			scheme=new AppScheme(480,320,"landscape",false,false,"linear");
+			//setup rectangles for componentes.
+			var backgroundRect:Rectangle=new Rectangle(0,0,480,320);
+			var dpadTouchRect:Rectangle=new Rectangle(12,20,252,282);
+			var dpadVisableRect:Rectangle=new Rectangle(44,75,180,180);
+			var buttonATouch:Rectangle=new Rectangle(301,174,75,104);
+			var buttonADisplay:Rectangle=new Rectangle(260,143,151,151);
+			var buttonBTouch:Rectangle=new Rectangle(383,88,75,104);
+			var buttonBDisplay:Rectangle=new Rectangle(342,65,151,151);
 
+			//create a background with premade movie clip.
+			var bg:BMImage=new BMImage(StageScaler.ScaleFlashRect(backgroundRect,true),new Background());
+			bg.name="background";
+			//The page variable helps with automating view stacks 
+			//using scheme.pageToString(i) with a dynamic control updates.
+			//We want these to all be on the defualt top view, page 1.
+			bg.page=1;			
+			scheme.addChild(bg);
+			
+			//create a pais of A/B buttons.			
+			var btnA:BMButton = new BMButton(StageScaler.ScaleFlashRect(buttonADisplay,false),new ButtonTest(),new ButtonTestDown(),"btnA");
+			btnA.page=1;
+			btnA.hitRect=StageScaler.ScaleFlashRect(buttonATouch,false);
+			scheme.addChild(btnA);
+
+			var btnB:BMButton = new BMButton(StageScaler.ScaleFlashRect(buttonBDisplay,false),new ButtonTest2(),new ButtonTest2Down(),"btnB");
+			btnB.page=1;
+			btnB.hitRect=StageScaler.ScaleFlashRect(buttonBTouch,false);
+			scheme.addChild(btnB);
+			
+			//create a dpad.
+			var dpd:BMDPad= new BMDPad();
+			//set scheme frame/page. 
+			dpd.page=1;
+			//apply rects.
+			dpd.hitRect=StageScaler.ScaleFlashRect(dpadTouchRect,false);
+			dpd.rect=StageScaler.ScaleFlashRect(dpadVisableRect,false);			
+			//alter the size of the dead zone.
+			dpd.deadZone=30;
+			//use radial or box mode.
+			dpd.radial=true;
+			//draw movieclips and set bitmap data for the dpad states.
+			//inactive/up-state			
+			dpd.inactive =  dpd.draw( new PadImage()); 
+			//direction down, downsatate.
+			dpd.down = dpd.draw(new PadBtnDnDown());
+			//direction left, downsatate.
+			dpd.left = dpd.draw(new PadBtnLtDown());
+			//direction leftDown, downsatate.
+			dpd.leftDown = dpd.draw(new PadBtnDnLtDown());
+			//direction leftUp, downsatate.
+			dpd.leftUp = dpd.draw(new PadBtnUpLtDown());
+			//direction right, downsatate.
+			dpd.right = dpd.draw(new PadBtnRtDown());
+			//direction rightDown, downsatate.
+			dpd.rightDown= dpd.draw( new PadBtnDnRtDown());
+			//direction rightUp, downsatate.
+			dpd.rightUp = dpd.draw(new PadBtnUpRtDown());
+			//direction up, downsatate.
+			dpd.up = dpd.draw(new PadBtnUpDown());					
+			//add to scheme.
+			scheme.addChild(dpd);
+			
 			//validate
 			lan.session.registry.validateAndAddControlXML(scheme.toString());			
 			
 			lan.start();
 			
 			addChild(lan.session.getSlotDisplay());
-
+			
 		}
 		
 		protected function onDevice(event:DeviceEvent):void
 		{
 			switch(event.type)
 			{
-				case DeviceEvent.DEVICE_LOADED:
+				case DeviceEvent.DEVICE_LOADED:					
 					event.device.addEventListener(DeviceEvent.SCHEME_BUTTON, onButton);
+					//listen for dpad data.
+					event.device.addEventListener(DeviceEvent.DPAD, onDPad);				
+					
 					break;
 				
-				case DeviceEvent.DEVICE_DISCONNECTED:
-					//AvatarManager.anim_walk(avId,"s", true);
+				case DeviceEvent.DEVICE_DISCONNECTED:					
 					event.device.removeEventListener(DeviceEvent.SCHEME_BUTTON, onButton);
+					event.device.removeEventListener(DeviceEvent.DPAD, onDPad);
 					break;
 			}
 		}
 		
+		protected function onDPad(event:DeviceEvent):void
+		{
+			var update:DPadUpdate=event.value as DPadUpdate; 	
+			//get current dpad direction intent.
+			direction.x=update.x;
+			direction.y=update.y;			
+			process();
+		}
+		
+		
 		protected function onButton(event:DeviceEvent):void
 		{		
-			var dir:String="";
-
-			if(event.value.name=="btnA" || event.value.name=="btnB" )
-			{			
-				var snd2:Sound =null
-				if(event.value.state=="up")
-					snd2 = new sound2() as Sound;
-				else
-					snd2 = new sound() as Sound;
 			
-				snd2.play(0,0,new SoundTransform(.333));	
+			if(event.value.name=="btnA"  )
+			{			
+				return;	
+			}
+			else if(event.value.name=="btnB")
+			{
 				return;
 			}
-					
-
 			
+		}
+		
+		public function process():void
+		{
 			
-			if(lan.clientButtonStates[event.device.deviceId]['padUp'] == 'down')
-			{							
-				display_dpad.gotoAndStop(2);
+			var dir:String="";
+			
+			if(direction.y<0 )
+			{											
 				dir="n";
 			}
-			if(lan.clientButtonStates[event.device.deviceId]['padRight'] == 'down')
-			{								
-				display_dpad.gotoAndStop(5);
-				dir="e";
-			}		
-			if(lan.clientButtonStates[event.device.deviceId]['padDown'] == 'down')
-			{			
-				display_dpad.gotoAndStop(3);
+			else if(direction.y>0 )
+			{							
 				dir="s";
 			}
-			if(lan.clientButtonStates[event.device.deviceId]['padLeft'] == 'down')
-			{							
-				display_dpad.gotoAndStop(4);
-				dir="w";
-			}
-
-
-			if(lan.clientButtonStates[event.device.deviceId]['padUpRight'] == 'down')
-			{								
-				display_dpad.gotoAndStop(6);
-				dir="ne";
-			}			
-			if(lan.clientButtonStates[event.device.deviceId]['padDownRight'] == 'down')
-			{								
-				display_dpad.gotoAndStop(9);
-				dir="se";
-			}	
-			if(lan.clientButtonStates[event.device.deviceId]['padDownLeft'] == 'down')
-			{			
-				display_dpad.gotoAndStop(8);
-				dir="sw";
-			}	
-			if(lan.clientButtonStates[event.device.deviceId]['padUpLeft'] == 'down')
-			{					
-				display_dpad.gotoAndStop(7);
-				dir="nw";
-			}
 			
-
-			
-			else if(event.value.state=="up" && dir=="")
+			if(direction.x>0 )
+			{												
+				dir+="e";
+			}
+			else if(direction.x<0)
 			{				
-				switch(event.value.name)
-				{
-					case "padDownLeft":
-						display_dpad.gotoAndStop(1);
-						break;
-					case "padDown":
-						display_dpad.gotoAndStop(1);
-						break;
-					case "padUp":
-						display_dpad.gotoAndStop(1);
-						break;
-					case "padUpRight":
-						display_dpad.gotoAndStop(1);
-						break;
-					case "padDownRight":
-						display_dpad.gotoAndStop(1);
-						break;
-					case "padLeft":
-						display_dpad.gotoAndStop(1);
-						break;
-					case "padUpLeft":
-						display_dpad.gotoAndStop(1);
-						break;
-					case "padRight":
-						display_dpad.gotoAndStop(1);
-						break;
-				}
-			}	
-		}
+				dir+="w";
+			}
+			
+			
+			switch(dir)
+			{
+				case "n":
+					display_dpad.gotoAndStop(2);
+					break;
+				case "s":
+					display_dpad.gotoAndStop(3);
+					break;
+				case "e":
+					display_dpad.gotoAndStop(5);
+					break;
+				case "w":
+					display_dpad.gotoAndStop(4);
+					break;
+				case "ne":
+					display_dpad.gotoAndStop(6);
+					break;
+				case "nw":
+					display_dpad.gotoAndStop(7);
+					break;
+				case "se":
+					display_dpad.gotoAndStop(9);
+					break;
+				case "sw":
+					display_dpad.gotoAndStop(8);
+					break;	
+				default:
+					display_dpad.gotoAndStop(1);
+					break;
+				
+			}
+		}		
 	}
 }
