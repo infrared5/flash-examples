@@ -30,9 +30,9 @@ package com.playbrassmonkey.demo
 		public var serverConnection:URLStream;
 		
 		
-		public var host:String='http://glb-stream15.streaming.init7.net';
+		public var host:String='http://live.radiocafe.ro:8064';
 		
-		public var resource:String='/1/rsc_de/aacp_64';
+		public var resource:String='/;stream.nsv';
 		
 		public function NBaac()
 		{

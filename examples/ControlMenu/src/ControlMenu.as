@@ -61,8 +61,8 @@ package
 			addEventListener(Event.ENTER_FRAME, onFrame);
 			// Change the text displayed in the radio skin.
 			baseSkin.metaData={
-				url:"http://radioswissclassic.ch",
-				name:"Radio Swiss Classic",
+				url:"",
+				name:"Radiocafe",
 				description:"Game controller demo.",
 				StreamTitle:"Brassmonkey Classics"
 			};

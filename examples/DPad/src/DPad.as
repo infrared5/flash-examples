@@ -5,16 +5,19 @@
 	import com.brassmonkey.controls.writer.AppScheme;
 	import com.brassmonkey.controls.writer.BMButton;
 	import com.brassmonkey.controls.writer.BMDPad;
+	import com.brassmonkey.controls.writer.BMDynamicText;
 	import com.brassmonkey.controls.writer.BMImage;
 	import com.brassmonkey.controls.writer.StageScaler;
 	import com.brassmonkey.events.DeviceEvent;
 	import com.brassmonkey.externals.DPadUpdate;
 	
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
-	[SWF(width="800", height="600", backgroundColor="000000")]
+
+	[SWF(width="768", height="768", backgroundColor="000000")]
 	public class DPad extends Sprite
 	{
 		//public var pad:DPadScheme=new DPadScheme();
@@ -25,16 +28,28 @@
 		private var scheme:AppScheme;
 		private var direction:Point=new Point();
 		public var _feedback:TextFeedback=new TextFeedback();
-
+		public var _grids:GirdWorks= new GirdWorks();
+		//20 343
+		private var dpd:BMDPad;
+		private var _zone:Number = .25;
 		public function DPad()
 		{
-			_feedback.x=128;
-			_feedback.y=500;			
+			_feedback.x=120;
+			_feedback.y=650;	
+			_grids.x=20;
+			_grids.y=363;
+			addChild(_grids);
+			_grids._flowing._step.visible=false;
+			_grids._stepper._flow.visible=false;
+			_grids._output.text="";
+			_grids._deadzone.text="Deadzone:"+_zone;
+			addEventListener(Event.ENTER_FRAME, onFrame);
+			
 			display_dpad.stop();
 			addChild(display_dpad);
 			addChild(_feedback);
-			display_dpad.x=400;
-			display_dpad.y=300;
+			display_dpad.x=376;
+			display_dpad.y=170;
 			//we require new brass monkey dpad feature.
 			//set minimum version 1.7.0
 			SettingsManager.VERSION_MINIMUM.major=1;			
@@ -59,7 +74,7 @@
 			var buttonADisplay:Rectangle=new Rectangle(260,143,151,151);
 			var buttonBTouch:Rectangle=new Rectangle(383,88,75,104);
 			var buttonBDisplay:Rectangle=new Rectangle(342,65,151,151);
-
+			var buttonZoneDisplay:Rectangle=new Rectangle(301,28,44.45,44.45);
 			//create a background with premade movie clip.
 			var bg:BMImage=new BMImage(StageScaler.ScaleFlashRect(backgroundRect,true),new Background());
 			bg.name="background";
@@ -79,18 +94,22 @@
 			btnB.page=1;
 			btnB.hitRect=StageScaler.ScaleFlashRect(buttonBTouch,false);
 			scheme.addChild(btnB);
+
+			var btnZone:BMButton = new BMButton(StageScaler.ScaleFlashRect(buttonZoneDisplay,false),new HitButton(),new HitButtonDown(),"deadzone");
+			btnZone.page=1;
+			btnZone.hitRect=StageScaler.ScaleFlashRect(buttonZoneDisplay,false);
+			scheme.addChild(btnZone);
 			
 			//create a dpad.
-			var dpd:BMDPad= new BMDPad();
+			dpd= new BMDPad();
 			//set scheme frame/page. 
 			dpd.page=1;
 			//apply rects.
 			dpd.hitRect=StageScaler.ScaleFlashRect(dpadTouchRect,false);
 			dpd.rect=StageScaler.ScaleFlashRect(dpadVisableRect,false);			
-			//alter the size of the dead zone.
-			dpd.deadZone=30;
-			//use radial or box mode.
-			dpd.radial=true;
+			//alter the % of the middle dead zone between 0 and 1.
+			dpd.deadZone=.25;
+
 			//draw movieclips and set bitmap data for the dpad states.
 			//inactive/up-state			
 			dpd.inactive =  dpd.draw( new PadImage()); 
@@ -113,6 +132,7 @@
 			//add to scheme.
 			scheme.addChild(dpd);
 			
+					
 			//validate
 			lan.session.registry.validateAndAddControlXML(scheme.toString());			
 			
@@ -122,6 +142,15 @@
 			
 		}
 		
+		protected function onChange(event:Event):void
+		{
+			
+		}
+		/**
+		 * This method handles device life-cycle. 
+		 * @param event
+		 * 
+		 */		
 		protected function onDevice(event:DeviceEvent):void
 		{
 			switch(event.type)
@@ -139,31 +168,145 @@
 					break;
 			}
 		}
+
 		
+		/**
+		 * This method Animates the circle 
+		 * @param e
+		 * 
+		 */
+		public function onFrame(e:Event):void
+		{			
+			_grids._flowing._flow.x += direction.x;
+			_grids._flowing._flow.y += direction.y;
+			if(_grids._flowing._flow.x<0)
+				_grids._flowing._flow.x=210;
+			if(_grids._flowing._flow.x>210)
+				_grids._flowing._flow.x=0;
+			if(_grids._flowing._flow.y<0)
+				_grids._flowing._flow.y=210;
+			if(_grids._flowing._flow.y>210)
+				_grids._flowing._flow.y=0;
+			
+		}
+		
+		/**
+		 *  This function is used to derive information about the dpad state and provide text feedback.
+		 * @param event
+		 * 
+		 */
 		protected function onDPad(event:DeviceEvent):void
 		{
 			var update:DPadUpdate=event.value as DPadUpdate; 	
+			var changes:String="";
+			if(direction.x<0)
+			{
+				changes="Left";
+			}
+			else if(direction.x>0)
+			{
+				changes="Right";
+			}
+			
+			if(changes.length && direction.x && direction.x!=update.x)
+			{
+				this._grids._output.text=changes+ " Released\n" + this._grids._output.text;
+			}
+			changes="";
+			if(direction.y<0)
+			{
+				changes="Up";
+			}
+			else if(direction.y>0)
+			{
+				changes="Down";
+			}
+			
+			if(changes.length && direction.y && direction.y!=update.y)
+			{
+				this._grids._output.text=changes+ " Released\n" + this._grids._output.text;
+			}
+			 changes="";
+			if(update.x<0)
+			{
+				changes="Left";
+			}
+			else if(update.x>0)
+			{
+				changes="Right";
+			}
+			
+			if(changes.length && direction.x!=update.x)
+			{
+				this._grids._output.text=changes+ " Pressed\n" + this._grids._output.text;
+			}
+			changes="";
+			if(update.y<0)
+			{
+				changes="Up";
+			}
+			else if(update.y>0)
+			{
+				changes="Down";
+			}
+			
+			if(changes.length && direction.y!=update.y)
+			{
+				this._grids._output.text=changes+ " Pressed\n" + this._grids._output.text;
+			}
+			
+			
 			//get current dpad direction intent.
 			direction.x=update.x;
 			direction.y=update.y;			
+			
+			
+			_grids._stepper._step.x += direction.x*30;
+			_grids._stepper._step.y += direction.y*30;
+			if(_grids._stepper._step.x<0)
+				_grids._stepper._step.x=210;
+			if(_grids._stepper._step.x>210)
+				_grids._stepper._step.x=0;
+			if(_grids._stepper._step.y<0)
+				_grids._stepper._step.y=210;
+			if(_grids._stepper._step.y>210)
+				_grids._stepper._step.y=0;			
+			
 			process();
 		}
 		
 		
 		protected function onButton(event:DeviceEvent):void
-		{		
-			
+		{			
+			if(event.value.state=="down"  )
+			{
+				return;
+			}
+			if(event.value.name=="deadzone"  )
+			{
+				_zone +=.1;
+				if(_zone>1)
+					_zone=.05;
+				
+				_grids._deadzone.text="Deadzone:"+_zone.toFixed(2);;
+				lan.session.updateControlScheme(event.device,scheme.pageToString(1));
+			}
 			if(event.value.name=="btnA"  )
 			{			
+
 				return;	
 			}
 			else if(event.value.name=="btnB")
 			{
+				
+
 				return;
-			}
-			
+			}			
 		}
 		
+		/**
+		 * Update the octogon  
+		 */
 		public function process():void
 		{
 			
