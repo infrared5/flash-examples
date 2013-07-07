@@ -17,6 +17,8 @@ package
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
+	import flash.net.FileReference;
 	
 	[SWF(width="480", height="320")]
 	public class Cards extends Sprite
@@ -33,7 +35,16 @@ package
 			addChild(new PokerControlScheme());
 		//	addChild(cursor);
 			stage.frameRate=60;
-			
+			function doPrint():void
+			{
+				var m:MonsterTruckControlScheme= new MonsterTruckControlScheme();
+				appScheme = BMControls.parseDynamicMovieClip(m,false,false,'landscape',480,320, AppDisplayObject.NEAREST);
+				trace(appScheme.toString());
+				var f:FileReference=new FileReference();
+				f.save(appScheme.toString(),"controls.xml")
+
+			}
+this.addEventListener(MouseEvent.MOUSE_DOWN, doPrint);
 			//initiate brassmonkey
 			bm= new BMApplication(loaderInfo.parameters);
 			bm.initiate("Cards", 4);
