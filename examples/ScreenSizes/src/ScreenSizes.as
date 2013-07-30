@@ -216,12 +216,7 @@ package
 				var disp:AppDisplayObject = fromThis.layout.displayObjects[i];
 				var originalArtwork:Rectangle = scaleFloatsToInts(disp,fromThis.header);
 				
-				if(disp.hasOwnProperty("hitRect") && disp["hitRect"]!=null) 
-				{
-					var hrRect:Rectangle = disp["hitRect"];
-					var originalHitrectAsNewfloats:Rectangle = scaleHitrectToInts(hrRect,fromThis.header);
-					disp["hitRect"]=originalHitrectAsNewfloats;
-				}
+
 				
 				var originalArtAsNewfloats:Rectangle = scaleIntsToFloats(originalArtwork, dX,dY); 
 				
@@ -260,6 +255,17 @@ package
 				}
 				if(!ndsp)
 					continue;
+				
+				
+				if(disp.hasOwnProperty("hitRect") && disp["hitRect"]!=null) 
+				{
+					var hrRect:Rectangle = disp["hitRect"];
+					var originalHitrectAsNewfloats:Rectangle = scaleHitrectToInts(hrRect,fromThis.header);
+					ndsp["hitRect"]=originalHitrectAsNewfloats;
+				}
+				
+				
+				
 				ndsp.hidden=disp.hidden;
 				ndsp.id=disp.id;
 				ndsp.name=disp.name;
