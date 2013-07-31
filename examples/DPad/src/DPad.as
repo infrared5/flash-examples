@@ -2,11 +2,9 @@
 {
 	import com.brassmonkey.BMApplication;
 	import com.brassmonkey.SettingsManager;
-	import com.brassmonkey.controls.BMControls;
 	import com.brassmonkey.controls.writer.AppScheme;
 	import com.brassmonkey.controls.writer.BMButton;
 	import com.brassmonkey.controls.writer.BMDPad;
-	import com.brassmonkey.controls.writer.BMDynamicText;
 	import com.brassmonkey.controls.writer.BMImage;
 	import com.brassmonkey.controls.writer.StageScaler;
 	import com.brassmonkey.events.DeviceEvent;
@@ -14,11 +12,8 @@
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.net.FileReference;
-	import flash.text.TextField;
 
 	[SWF(width="768", height="768", backgroundColor="000000")]
 	public class DPad extends Sprite
@@ -36,26 +31,13 @@
 		private var dpd:BMDPad;
 		private var _zone:Number = .25;
 		
-		var sds:AppScheme;
-		public function onM(me:MouseEvent):void
-		{
-			var f:FileReference=new FileReference();
-			sds.toString();
-			f.save(sds.pageToString(1),"midi_controls_update.txt");
-		}
+		private var sds:AppScheme;
+
+		
 		public function DPad()
 		{
 			
-			var ddd:MidiControls=new MidiControls();
-			
-			StageScaler.LONG=1024;
-			StageScaler.SHORT=768;
-			
-			sds=BMControls.parseDynamicMovieClip(ddd,false,false,"landscape",1024,768);
-			
-			stage.addEventListener(MouseEvent.MOUSE_UP, onM);
-			return;
-		
+
 			
 			_feedback.x=120;
 			_feedback.y=650;	
